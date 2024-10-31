@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,9 @@ namespace Data.Repositories.Interfaces
 {
     public interface ICurrencyRepository
     {
+        List<Currency> GetAllCurrency();
+        int AddCurrency(Currency currency);
+        public bool DeleteCurrency(int id);
+        bool UpdateCurrency(Currency currency);
     }
 }

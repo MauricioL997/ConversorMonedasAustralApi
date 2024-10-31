@@ -1,15 +1,10 @@
 ﻿using Common.DTO;
 using Data.Entities;
 using Data.Repositories.Interfaces;
-using Data.Repositories.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 using System.Security.Claims;
-using System.Security.Cryptography.Xml;
 using System.Text;
 
 namespace ConversorMonedasAustralApi.Controllers

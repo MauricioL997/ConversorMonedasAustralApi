@@ -55,7 +55,7 @@ namespace Data.Repositories.Repositories
             var existingUser = _context.Users.FirstOrDefault(u => u.Id == user.Id);
             if (existingUser != null)
             {
-                _context.Users.Update(user);
+                
                 _context.SaveChanges();
                 return true;
             }
