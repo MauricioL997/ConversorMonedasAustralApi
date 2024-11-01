@@ -10,7 +10,9 @@ namespace Services.Interfaces
 {
     public interface IUserService
     {
-        User Authenticate(string Name, string password);
+        string Authenticate(AuthRequestDto credentials);
+        User ValidateUser(AuthRequestDto credentials);
+        string GenerateJwtToken(User user);
         int RegisterUser(UserDto userDto);
     }
 }

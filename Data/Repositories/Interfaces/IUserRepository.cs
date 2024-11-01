@@ -1,4 +1,5 @@
-﻿using Data.Entities;
+﻿using Common.Enum;
+using Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,6 @@ namespace Data.Repositories.Interfaces
         bool UpdateUser(User user);
         bool SoftDeleteUser(string Username);
         bool UndeleteUser(string username);
-        bool UpdateUserSubscription(int userId, int subscriptionId);
+        bool UpdateUserSubscription(int userId, SubscriptionType newType);
     }
 }

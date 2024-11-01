@@ -1,17 +1,19 @@
 ﻿using Common.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entities
 {
     public class Subscription
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int ConversionLimit { get; set; }
-        public bool MonthlyReset { get; set; }
-        public Common.Enum.SubscriptionType State { get; set; }
-}
+
+        [Required]
+        public SubscriptionType Type { get; set; } // Tipo de suscripción (Free, Trial, Pro)
+
+        [Required]
+        public bool MonthlyReset { get; set; } // Indica si el límite se reinicia mensualmente
+    }
 }

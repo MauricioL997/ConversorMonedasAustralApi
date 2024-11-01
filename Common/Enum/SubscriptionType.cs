@@ -8,8 +8,8 @@ namespace Common.Enum
 {
     public enum SubscriptionType
     {
-        Active,
-        Deleted,
-        Guest
+        Free,
+        Trial,
+        Pro
     }
 }

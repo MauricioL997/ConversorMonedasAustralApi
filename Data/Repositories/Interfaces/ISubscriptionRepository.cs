@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common.Enum;
+using Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,8 @@ namespace Data.Repositories.Interfaces
 {
     public interface ISubscriptionRepository
     {
+        List<Subscription> GetAllSubscriptions();
+        Subscription GetSubscriptionByType(SubscriptionType type);
     }
+
 }

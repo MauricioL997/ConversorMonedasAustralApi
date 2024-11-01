@@ -12,7 +12,6 @@ namespace Data.Context
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Currency> Currency { get; set; }
-
         public DbSet<Conversion> Conversion { get; set; }
         public DbSet<Subscription> Subscription { get; set; }
 

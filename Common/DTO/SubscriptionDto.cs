@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Enum;
 
 namespace Common.DTO
 {
-    internal class SubscriptionDto
+    public class SubscriptionDto
     {
+        public int Id { get; set; }
+        public SubscriptionType Type { get; set; } // Tipo de suscripción (Free, Trial, Pro)
+        public int ConversionLimit { get; set; } // Límite de conversiones
+        public bool MonthlyReset { get; set; } // Indica si se reinicia mensualmente
     }
 }

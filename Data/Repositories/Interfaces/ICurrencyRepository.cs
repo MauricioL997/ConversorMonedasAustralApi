@@ -1,17 +1,15 @@
 ﻿using Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Repositories.Interfaces
 {
     public interface ICurrencyRepository
     {
         List<Currency> GetAllCurrency();
+        Currency GetCurrencyById(int id);
+        Currency GetCurrencyByCode(string code); 
         int AddCurrency(Currency currency);
-        public bool DeleteCurrency(int id);
         bool UpdateCurrency(Currency currency);
+        bool DeleteCurrency(int id);
     }
 }
+

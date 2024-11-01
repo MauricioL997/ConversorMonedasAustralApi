@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.DTO
+namespace Common.Enum
 {
-    internal class LoginRequestDto
+    public enum EnumUser
     {
+        Admin,
+        user,
+        Guest
     }
 }

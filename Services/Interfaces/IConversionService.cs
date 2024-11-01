@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Services.Interfaces
 {
-    internal interface IConversionService
+    public interface IConversionService
     {
+        List<ConversionDto> GetUserConversions(int userId);
+        ConversionDto PerformConversion(int userId, string fromCurrency, string toCurrency, decimal amount);
     }
 }

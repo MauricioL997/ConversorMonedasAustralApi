@@ -1,4 +1,5 @@
-﻿using Data.Context;
+﻿using Common.Enum;
+using Data.Context;
 using Data.Entities;
 using Data.Repositories.Interfaces;
 using System;
@@ -16,9 +17,9 @@ namespace Data.Repositories.Repositories
         {
             _context = context;
         }
-        public User? Authenticate(string Name, string password)
+        public User? Authenticate(string username, string password)
         {
-            return _context.Users.FirstOrDefault(u => u.Name == Name && u.Password == password );
+            return _context.Users.FirstOrDefault(u => u.UserName == username && u.Password == password );
         }
         public List<User> GetAllActiveUsers()
         {
@@ -55,7 +56,15 @@ namespace Data.Repositories.Repositories
             var existingUser = _context.Users.FirstOrDefault(u => u.Id == user.Id);
             if (existingUser != null)
             {
-                
+                existingUser.UserName = user.UserName;
+                existingUser.Email = user.Email;
+                existingUser.Password = user.Password;
+                existingUser.FirstName = user.FirstName;
+                existingUser.LastName = user.LastName;
+                existingUser.Role = user.Role;
+                existingUser.Type = user.Type;
+                existingUser.IsActive = user.IsActive;
+
                 _context.SaveChanges();
                 return true;
             }
@@ -87,12 +96,12 @@ namespace Data.Repositories.Repositories
             }
             return false;
         }
-        public bool UpdateUserSubscription(int userId, int subscriptionId)
+        public bool UpdateUserSubscription(int userId, SubscriptionType newType)
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == userId);
             if (user != null)
             {
-                user.SubscriptionId = subscriptionId;
+                user.Type = newType;
                 _context.SaveChanges();
                 return true;
             }

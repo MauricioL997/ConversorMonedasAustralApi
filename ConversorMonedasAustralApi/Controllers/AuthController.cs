@@ -1,11 +1,7 @@
 ﻿using Common.DTO;
-using Data.Entities;
-using Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace ConversorMonedasAustralApi.Controllers
 {
@@ -13,44 +9,28 @@ namespace ConversorMonedasAustralApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private readonly IUserRepository _userRepository;
-    
-        public AuthController(IConfiguration configuration, IUserRepository userRepository)
+        private readonly IUserService _userService;
+
+        public AuthController(IUserService userService)
         {
-        _configuration = configuration;
-        _userRepository = userRepository;
+            _userService = userService;
         }
 
-        [HttpPost]
+        [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthRequestDto credentials)
         {
-            User? userAuthenticate = _userRepository.Authenticate(credentials.Username, credentials.Password);
+            // Paso 1: Validar las credenciales y generar el token
+            var token = _userService.Authenticate(credentials);
 
-            if (userAuthenticate is not null)
+            if (token == null)
             {
-                var securityPassword = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Authentication:SecretForKey"]));
-                SigningCredentials signature = new SigningCredentials(securityPassword, SecurityAlgorithms.HmacSha256);
-
-                var claimsForToken = new List<Claim>
-                {
-                    new Claim("sub", userAuthenticate.Id.ToString()),
-                    new Claim("given_name", userAuthenticate.Name)
-                };
-
-                var jwtSecurityToken = new JwtSecurityToken(
-                    _configuration["Authentication:Issuer"],
-                    _configuration["Authentication:Audience"],
-                    claimsForToken,
-                    DateTime.UtcNow,
-                    DateTime.UtcNow.AddHours(1),
-                    signature);
-
-                string tokenToReturn = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-
-                return Ok(tokenToReturn);
+                return Unauthorized(new { Message = "Credenciales incorrectas." });
             }
-            return Unauthorized();
+
+            // Paso 2: Retornar el token
+            return Ok(new { Token = token });
         }
     }
 }
+
+
