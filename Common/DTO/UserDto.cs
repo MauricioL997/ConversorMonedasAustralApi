@@ -11,7 +11,7 @@ namespace Common.DTO
         public required string Email { get; set; } // Correo electrónico
 
         [DataType(DataType.Password)]
-        public required string Password { get; set; } // Contraseña
+        public string Password { get; set; } // Contraseña
 
         public required string FirstName { get; set; } // Nombre
 

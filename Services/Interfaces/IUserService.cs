@@ -1,4 +1,5 @@
 ﻿using Common.DTO;
+using Common.Enum;
 using Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,13 @@ namespace Services.Interfaces
         User ValidateUser(AuthRequestDto credentials);
         string GenerateJwtToken(User user);
         int RegisterUser(UserDto userDto);
+        bool UpdateUser(UserDto userDto);
+        bool SoftDeleteUser(string username);
+        bool UndeleteUser(string username);
+        List<UserDto> GetAllActiveUsers();
+        List<UserDto> GetAllInactiveUsers();
+        UserDto GetUserById(int id);
+        UserDto GetUserByUsername(string username);
+        bool UpdateUserSubscription(int userId, SubscriptionType newType);
     }
 }
